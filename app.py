@@ -4,17 +4,14 @@ import requests
 
 app = Flask(__name__)
 
-@app.route('/api', methods=['GET'])
-def detect():
-    url = request.args.get('url')
-
-    res = classify()
+@app.route('/api/<url>')
+def detect(url):
+    res = classify(url)
     return res
 
 
-@app.route('/api/phishing/register', methods=['GET'])
-def register():
-    url = request.args.get('url')
+# @app.route('/api/phishing/register/url>')
+# def register(url):
 
 
 # @app.route('/api/phishing/database', methods=['GET'])
