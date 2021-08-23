@@ -10,7 +10,7 @@ def detect(url):
     return res
 
 
-# @app.route('/api/phishing/register/url>')
+# @app.route('/api/phishing/register/<url>')
 # def register(url):
 
 
