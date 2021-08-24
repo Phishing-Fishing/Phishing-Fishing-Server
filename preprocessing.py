@@ -86,36 +86,24 @@ def diff_ngram(sa,sb,num):
     return cnt/len(b) #cnt/len=(중복되는 횟수/b의 길이), r=중복되는 단어
 
 def check_brand(url) :
-  
-  #url_list = ["naver", "daum", "amazon"]
   percent = 0
   same = 0
   check_url = urlparse(url).netloc.lower()+urlparse(url).path.lower()
-  for element in url_list :
+  for element in list :
     if element in url :
       return 1
     else :
-      #position = []
-      #index = -1
-      #while True :
-        #index = url.find(element[0], index+1)
-        #if index == -1:
-          #break
-        #position.append(index)
-      #print(position)
       for pos in range(len(check_url)) :
         same = 0
         for i, c in enumerate(element) :
-          if pos+i < len(check_url) : 
-            if url[pos+i] == c:
+          if pos+i < len(check_url) :
+            if url[pos+i] == c :
               same = same + 1
             else :
               continue
-            temp = same / len(element)
+            temp = same/len(element)
             if percent < temp :
-              #print(element)
               percent = temp
-              #print(percent)
       continue
   return percent
 
