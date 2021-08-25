@@ -11,17 +11,9 @@ import joblib
 
 
 def classify(url):
-    clf = joblib.load("Phishing-Fishing-Server/model.joblib")
+    clf = joblib.load("model.joblib")
     data = preprocessing(url)
 
     y_pred = clf.predict(data)
 
     return y_pred[0]
-
-
-# def train_random_forest_with_params(X, y, params):
-#     model = RandomForestClassifier()
-#     model.set_params(**params)
-#     model = model.fit(X, y)
-#     score = model.score(X, y)
-#     return model
