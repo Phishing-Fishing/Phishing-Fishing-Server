@@ -13,10 +13,18 @@ migrate = Migrate(app, db)
 from models import Phishing
 
 
-@app.route('/api/<url>')
-def detect(url):
-    res = classify(url)
-    return res
+@app.route('/api/phishing', methods=['POST'])
+def detect():
+    if request.method == 'POST':
+        if request.is_json:
+            data=request.get_json()
+            url = data['url']
+            res = str(classify(url))
+            response = jsonify({
+                'phishing' : res
+            })
+            response.status_code = 200
+    return response
 
 
 @app.route('/api/phishing/register', methods=['POST'])
