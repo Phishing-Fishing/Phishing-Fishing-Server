@@ -6,7 +6,6 @@ import requests
 import os
 import re
 
-# 다시 수정받기
 list = ['google','naver','youtube','daum','tistory','kakao','tmall','google','coupang','amazon','netflix','facebook','sohu','namu','qq','wikipedia','taobao','360','jd','microsoft','baidu',
  'yahoo','instagram','dcinside','zoom','adobe','donga','11st','twitch','nate','weibo','gmarket','sina','chosun','jobkorea','office','fmkorea','danawa','apple','saramin',
  'stackoverflow','ebay','aliexpress','bing','afreecatv','dropbox','yna','auction','yahoo','brunch','reddit','myshopify','chase','live','chaturbate','force','zillow','linkedin',
@@ -20,16 +19,11 @@ def length(url):
 
 def url_shorten(url):
     req = 'https://unshorten.me/json/'+url
-    response = requests.get(req)
-    rescode = reponse.status_code
-    if(rescode == 200) :
-      response_body = response.json()
-      success = response_body['success']
-      if success == True:
-        return response_body['resolved_url']
-      else :
+    response = requests.request("GET", req).json()
+    if (response['success'] and response['resolved_url'] != url): 
+        return 1
+    else:                                                        
         return 0
-    return 0
 
 def at_sign(url):
   if '@' in url:
@@ -115,14 +109,9 @@ def brands(url):
 
 def preprocessing(url):
     res = []
-    unshorten_check = 0
-    resolved = url_shorten(quote(url))
-    if resolved :
-      url = resolved
-      unshorten_check = 1
     
     res.append(length(url))
-    res.append(unshorten_check)
+    res.append(url_shorten(url))
     res.append(at_sign(url))
     res.append(double_slash(url))
     res.append(dot(url))
