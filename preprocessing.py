@@ -110,17 +110,17 @@ def brands(url):
 def preprocessing(url):
     res = []
     
-    res.append(length(url))
     res.append(url_shorten(url))
+    res.append(length(url))
     res.append(at_sign(url))
     res.append(double_slash(url))
+    res.append(http(url))
+    res.append(dash(url))
     res.append(dot(url))
     res.append(IP_add(url))
-    res.append(dash(url))
-    res.append(http(url))
     res.append(check_brand(url))
 
-    columns = ['length', 'url_shorten', 'at_sign', 'redirection', 'dot', 'IP', 'dash', 'http', 'brands']
-    final_res = pd.DataFrame(res, columns= columns)
+    columns = ['unshorten', 'length', 'at', 'double_slash', 'http', 'hyphen', 'dot', 'ip_form', 'brand']
+    final_res = pd.DataFrame([res], columns= columns)
 
     return final_res
