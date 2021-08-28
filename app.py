@@ -12,6 +12,9 @@ migrate = Migrate(app, db)
 
 from models import Phishing
 
+@app.route('/')
+def main():
+    return "Phishing-Fishing"
 
 @app.route('/api/phishing', methods=['POST'])
 def detect():
